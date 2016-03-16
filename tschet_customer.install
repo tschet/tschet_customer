@@ -22,7 +22,7 @@ function tschet_customer_install() {
       'type' => 'tschet_customer',
       'name' => $t('Customers'),
       'base' => 'node_content',
-      'title_label' => $t('Title'),
+      'title_label' => $t('Displayed Customer Name'),
       'description' => $t('Business Customers'),
       'custom' => TRUE,
     );
@@ -141,8 +141,452 @@ function tschet_customer_install() {
 function _tschet_customer_install_fields() {
   $t = get_t();
   return array(
+// FIELD: field_tschet_customer_name.
+    'field_tschet_customer_name' => array(
+      'translatable' => '0',
+      'entity_types' => array(),
+      'settings' => array(
+        'components' => array(
+          'title' => 'title',
+          'given' => 'given',
+          'middle' => 'middle',
+          'family' => 'family',
+          'generational' => 'generational',
+          'credentials' => 'credentials',
+        ),
+        'minimum_components' => array(
+          'given' => 'given',
+          'family' => 'family',
+          'title' => 0,
+          'middle' => 0,
+          'generational' => 0,
+          'credentials' => 0,
+        ),
+        'labels' => array(
+          'title' => 'Title',
+          'given' => 'Given',
+          'middle' => 'Middle name(s)',
+          'family' => 'Family',
+          'generational' => 'Generational',
+          'credentials' => 'Credentials',
+        ),
+        'max_length' => array(
+          'title' => '31',
+          'given' => '63',
+          'middle' => '127',
+          'family' => '63',
+          'generational' => '15',
+          'credentials' => '255',
+        ),
+        'autocomplete_source' => array(
+          'title' => array(
+            'title' => 'title',
+          ),
+          'given' => array(),
+          'middle' => array(),
+          'family' => array(),
+          'generational' => array(
+            'generational' => 0,
+          ),
+          'credentials' => array(),
+        ),
+        'autocomplete_separator' => array(
+          'title' => ' ',
+          'given' => ' -',
+          'middle' => ' -',
+          'family' => ' -',
+          'generational' => ' ',
+          'credentials' => ', ',
+        ),
+        'allow_family_or_given' => 0,
+        'title_options' => "-- --\r\nMr.\r\nMrs.\r\nMiss\r\nMs.\r\nDr.\r\nProf.",
+        'generational_options' => "-- --\r\nJr.\r\nSr.\r\nI\r\nII\r\nIII\r\nIV\r\nV\r\nVI\r\nVII\r\nVIII\r\nIX\r\nX",
+        'sort_options' => array(
+          'title' => 'title',
+          'generational' => 0,
+        ),
+      ),
+      'storage' => array(
+        'type' => 'field_sql_storage',
+        'settings' => array(),
+        'module' => 'field_sql_storage',
+        'active' => '1',
+        'details' => array(
+          'sql' => array(
+            'FIELD_LOAD_CURRENT' => array(
+              'field_data_field_tschet_customer_name' => array(
+                'title' => 'field_tschet_customer_name_title',
+                'given' => 'field_tschet_customer_name_given',
+                'middle' => 'field_tschet_customer_name_middle',
+                'family' => 'field_tschet_customer_name_family',
+                'generational' => 'field_tschet_customer_name_generational',
+                'credentials' => 'field_tschet_customer_name_credentials',
+              ),
+            ),
+            'FIELD_LOAD_REVISION' => array(
+              'field_revision_field_tschet_customer_name' => array(
+                'title' => 'field_tschet_customer_name_title',
+                'given' => 'field_tschet_customer_name_given',
+                'middle' => 'field_tschet_customer_name_middle',
+                'family' => 'field_tschet_customer_name_family',
+                'generational' => 'field_tschet_customer_name_generational',
+                'credentials' => 'field_tschet_customer_name_credentials',
+              ),
+            ),
+          ),
+        ),
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(
+        'given' => array(
+          'given',
+        ),
+        'family' => array(
+          'family',
+        ),
+      ),
+      'field_name' => 'field_tschet_customer_name',
+      'type' => 'name',
+      'module' => 'name',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'columns' => array(
+        'title' => array(
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => FALSE,
+        ),
+        'given' => array(
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => FALSE,
+        ),
+        'middle' => array(
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => FALSE,
+        ),
+        'family' => array(
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => FALSE,
+        ),
+        'generational' => array(
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => FALSE,
+        ),
+        'credentials' => array(
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => FALSE,
+        ),
+      ),
+      'bundles' => array(
+        'node' => array(
+          'tschet_customer',
+        ),
+      ),
+    ),
 
-  // End of field definitions array.
+// FIELD: field_tschet_customer_address.
+    'field_tschet_customer_address' => array(
+      'translatable' => '0',
+      'entity_types' => array(),
+      'settings' => array(
+        'location_settings' => array(
+          'form' => array(
+            'fields' => array(
+              'name' => array(
+                'collect' => '1',
+                'default' => '',
+                'weight' => '2',
+              ),
+              'street' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '4',
+              ),
+              'additional' => array(
+                'collect' => '1',
+                'default' => '',
+                'weight' => '6',
+              ),
+              'city' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '8',
+              ),
+              'province' => array(
+                'collect' => '2',
+                'widget' => 'autocomplete',
+                'default' => '',
+                'weight' => '10',
+              ),
+              'postal_code' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '12',
+              ),
+              'country' => array(
+                'collect' => '1',
+                'default' => 'us',
+                'weight' => '14',
+              ),
+              'locpick' => array(
+                'collect' => '0',
+                'weight' => '20',
+              ),
+              'phone' => array(
+                'collect' => '1',
+                'default' => '',
+                'weight' => '25',
+              ),
+              'email' => array(
+                'collect' => '1',
+                'default' => '',
+                'weight' => '25',
+              ),
+            ),
+          ),
+          'display' => array(
+            'hide' => array(
+              'country' => 'country',
+              'locpick' => 'locpick',
+              'province_name' => 'province_name',
+              'country_name' => 'country_name',
+              'map_link' => 'map_link',
+              'coords' => 'coords',
+              'name' => 0,
+              'street' => 0,
+              'additional' => 0,
+              'city' => 0,
+              'province' => 0,
+              'postal_code' => 0,
+              'email' => 0,
+              'phone' => 0,
+            ),
+          ),
+        ),
+        'gmap_macro' => '[gmap ]',
+        'gmap_marker' => 'drupal',
+      ),
+      'storage' => array(
+        'type' => 'field_sql_storage',
+        'settings' => array(),
+        'module' => 'field_sql_storage',
+        'active' => '1',
+        'details' => array(
+          'sql' => array(
+            'FIELD_LOAD_CURRENT' => array(
+              'field_data_field_tschet_customer_address' => array(
+                'lid' => 'field_tschet_customer_address_lid',
+              ),
+            ),
+            'FIELD_LOAD_REVISION' => array(
+              'field_revision_field_tschet_customer_address' => array(
+                'lid' => 'field_tschet_customer_address_lid',
+              ),
+            ),
+          ),
+        ),
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(
+        'lid' => array(
+          'lid',
+        ),
+      ),
+      'field_name' => 'field_tschet_customer_address',
+      'type' => 'location',
+      'module' => 'location_cck',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'columns' => array(
+        'lid' => array(
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => FALSE,
+        ),
+      ),
+      'bundles' => array(
+        'node' => array(
+          'tschet_customer',
+        ),
+      ),
+    ),
+
+// FIELD: field_tschet_customer_dob.
+    'field_tschet_customer_dob' => array(
+      'translatable' => '0',
+      'entity_types' => array(),
+      'settings' => array(
+        'granularity' => array(
+          'month' => 'month',
+          'day' => 'day',
+          'year' => 'year',
+          'hour' => 0,
+          'minute' => 0,
+          'second' => 0,
+        ),
+        'tz_handling' => 'none',
+        'timezone_db' => '',
+        'cache_enabled' => 1,
+        'cache_count' => '1',
+        'todate' => '',
+      ),
+      'storage' => array(
+        'type' => 'field_sql_storage',
+        'settings' => array(),
+        'module' => 'field_sql_storage',
+        'active' => '1',
+        'details' => array(
+          'sql' => array(
+            'FIELD_LOAD_CURRENT' => array(
+              'field_data_field_tschet_customer_dob' => array(
+                'value' => 'field_tschet_customer_dob_value',
+              ),
+            ),
+            'FIELD_LOAD_REVISION' => array(
+              'field_revision_field_tschet_customer_dob' => array(
+                'value' => 'field_tschet_customer_dob_value',
+              ),
+            ),
+          ),
+        ),
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'field_name' => 'field_tschet_customer_dob',
+      'type' => 'datetime',
+      'module' => 'date',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'columns' => array(
+        'value' => array(
+          'type' => 'datetime',
+          'mysql_type' => 'datetime',
+          'pgsql_type' => 'timestamp without time zone',
+          'sqlite_type' => 'varchar',
+          'sqlsrv_type' => 'smalldatetime',
+          'not null' => FALSE,
+          'sortable' => TRUE,
+          'views' => TRUE,
+        ),
+      ),
+      'bundles' => array(
+        'node' => array(
+          'tschet_customer',
+        ),
+      ),
+    ),
+
+// FIELD: field_tschet_customer_phone.
+    'field_tschet_customer_phone' => array(
+      'translatable' => '0',
+      'entity_types' => array(),
+      'settings' => array(
+        'country' => 'ca',
+      ),
+      'storage' => array(
+        'type' => 'field_sql_storage',
+        'settings' => array(),
+        'module' => 'field_sql_storage',
+        'active' => '1',
+        'details' => array(
+          'sql' => array(
+            'FIELD_LOAD_CURRENT' => array(
+              'field_data_field_tschet_customer_phone' => array(
+                'value' => 'field_tschet_customer_phone_value',
+              ),
+            ),
+            'FIELD_LOAD_REVISION' => array(
+              'field_revision_field_tschet_customer_phone' => array(
+                'value' => 'field_tschet_customer_phone_value',
+              ),
+            ),
+          ),
+        ),
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'field_name' => 'field_tschet_customer_phone',
+      'type' => 'phone',
+      'module' => 'phone',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'columns' => array(
+        'value' => array(
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => FALSE,
+        ),
+      ),
+      'bundles' => array(
+        'node' => array(
+          'tschet_customer',
+        ),
+      ),
+    ),
+
+// FIELD: field_tschet_customer_email.
+    'field_tschet_customer_email' => array(
+      'translatable' => '0',
+      'entity_types' => array(),
+      'settings' => array(),
+      'storage' => array(
+        'type' => 'field_sql_storage',
+        'settings' => array(),
+        'module' => 'field_sql_storage',
+        'active' => '1',
+        'details' => array(
+          'sql' => array(
+            'FIELD_LOAD_CURRENT' => array(
+              'field_data_field_tschet_customer_email' => array(
+                'email' => 'field_tschet_customer_email_email',
+              ),
+            ),
+            'FIELD_LOAD_REVISION' => array(
+              'field_revision_field_tschet_customer_email' => array(
+                'email' => 'field_tschet_customer_email_email',
+              ),
+            ),
+          ),
+        ),
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'field_name' => 'field_tschet_customer_email',
+      'type' => 'email',
+      'module' => 'email',
+      'active' => '1',
+      'locked' => '0',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'columns' => array(
+        'email' => array(
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => FALSE,
+        ),
+      ),
+      'bundles' => array(
+        'node' => array(
+          'tschet_customer',
+        ),
+      ),
+    ),
+
+
+    // End of field definitions array.
   );
 }
 
@@ -159,6 +603,340 @@ function _tschet_customer_installed_instances() {
   $t = get_t();
 
   return array(
+// INSTANCE: field_tschet_customer_name.
+    'field_tschet_customer_name' => array(
+      'label' => 'Customer Name',
+      'widget' => array(
+        'weight' => '1',
+        'type' => 'name_widget',
+        'module' => 'name',
+        'active' => 0,
+        'settings' => array(),
+      ),
+      'settings' => array(
+        'size' => array(
+          'title' => '6',
+          'given' => '20',
+          'middle' => '20',
+          'family' => '20',
+          'generational' => '5',
+          'credentials' => '35',
+        ),
+        'title_display' => array(
+          'title' => 'description',
+          'given' => 'description',
+          'middle' => 'description',
+          'family' => 'description',
+          'generational' => 'description',
+          'credentials' => 'description',
+        ),
+        'field_type' => array(
+          'title' => 'select',
+          'given' => 'text',
+          'middle' => 'text',
+          'family' => 'text',
+          'generational' => 'select',
+          'credentials' => 'text',
+        ),
+        'inline_css' => array(
+          'title' => '',
+          'given' => '',
+          'middle' => '',
+          'family' => '',
+          'generational' => '',
+          'credentials' => '',
+        ),
+        'labels' => array(
+          'title' => '',
+          'given' => '',
+          'middle' => '',
+          'family' => '',
+          'generational' => '',
+          'credentials' => '',
+        ),
+        'components' => array(
+          'title' => 0,
+          'given' => 0,
+          'middle' => 0,
+          'family' => 0,
+          'generational' => 0,
+          'credentials' => 0,
+        ),
+        'minimum_components' => array(
+          'title' => 0,
+          'given' => 0,
+          'middle' => 0,
+          'family' => 0,
+          'generational' => 0,
+          'credentials' => 0,
+        ),
+        'component_css' => '',
+        'component_layout' => 'default',
+        'show_component_required_marker' => 0,
+        'credentials_inline' => 0,
+        'override_format' => 'default',
+        'title_field' => 'select',
+        'generational_field' => 'select',
+        'user_register_form' => FALSE,
+      ),
+      'display' => array(
+        'default' => array(
+          'label' => 'inline',
+          'type' => 'name_formatter',
+          'weight' => '0',
+          'settings' => array(
+            'format' => 'full',
+            'markup' => 0,
+            'output' => 'default',
+            'multiple' => 'default',
+            'multiple_delimiter' => ', ',
+            'multiple_and' => 'text',
+            'multiple_delimiter_precedes_last' => 'never',
+            'multiple_el_al_min' => '3',
+            'multiple_el_al_first' => '1',
+          ),
+          'module' => 'name',
+        ),
+        'full' => array(
+          'label' => 'inline',
+          'type' => 'hidden',
+          'weight' => '5',
+          'settings' => array(),
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'type' => 'hidden',
+          'weight' => '5',
+          'settings' => array(),
+        ),
+      ),
+      'required' => 1,
+      'description' => '',
+      'default_value' => NULL,
+      'field_name' => 'field_tschet_customer_name',
+      'entity_type' => 'node',
+      'bundle' => 'tschet_customer',
+      'deleted' => '0',
+    ),
+
+// INSTANCE: field_tschet_customer_address.
+    'field_tschet_customer_address' => array(
+      'label' => 'Customer Address',
+      'widget' => array(
+        'weight' => '3',
+        'type' => 'location',
+        'module' => 'location_cck',
+        'active' => 0,
+        'settings' => array(),
+      ),
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'type' => 'location_default',
+          'weight' => '2',
+          'settings' => array(),
+          'module' => 'location_cck',
+        ),
+        'full' => array(
+          'label' => 'hidden',
+          'type' => 'location_default',
+          'weight' => '1',
+          'settings' => array(),
+          'module' => 'location_cck',
+        ),
+        'teaser' => array(
+          'label' => 'hidden',
+          'type' => 'location_default',
+          'weight' => '1',
+          'settings' => array(),
+          'module' => 'location_cck',
+        ),
+      ),
+      'required' => 1,
+      'description' => '',
+      'default_value' => NULL,
+      'field_name' => 'field_tschet_customer_address',
+      'entity_type' => 'node',
+      'bundle' => 'tschet_customer',
+      'deleted' => '0',
+    ),
+
+// INSTANCE: field_tschet_customer_dob.
+    'field_tschet_customer_dob' => array(
+      'label' => 'Customer Date of Birth',
+      'widget' => array(
+        'weight' => '2',
+        'type' => 'date_text',
+        'module' => 'date',
+        'active' => 1,
+        'settings' => array(
+          'input_format' => 'm/d/Y - H:i:s',
+          'input_format_custom' => '',
+          'year_range' => '-3:+3',
+          'increment' => 15,
+          'label_position' => 'above',
+          'text_parts' => array(),
+          'no_fieldset' => 0,
+        ),
+      ),
+      'settings' => array(
+        'default_value' => 'blank',
+        'default_value_code' => '',
+        'default_value2' => 'same',
+        'default_value_code2' => '',
+        'user_register_form' => FALSE,
+      ),
+      'display' => array(
+        'default' => array(
+          'label' => 'inline',
+          'type' => 'date_default',
+          'weight' => '1',
+          'settings' => array(
+            'format_type' => 'tschet_date_format_month_day_year',
+            'fromto' => 'both',
+            'multiple_number' => '',
+            'multiple_from' => '',
+            'multiple_to' => '',
+            'show_remaining_days' => 0,
+          ),
+          'module' => 'date',
+        ),
+        'full' => array(
+          'label' => 'inline',
+          'type' => 'date_default',
+          'weight' => '0',
+          'settings' => array(
+            'format_type' => 'tschet_date_format_month_day_year',
+            'fromto' => 'both',
+            'multiple_number' => '',
+            'multiple_from' => '',
+            'multiple_to' => '',
+            'show_remaining_days' => 0,
+          ),
+          'module' => 'date',
+        ),
+        'teaser' => array(
+          'label' => 'inline',
+          'type' => 'date_default',
+          'weight' => '0',
+          'settings' => array(
+            'format_type' => 'tschet_date_format_month_day_year',
+            'fromto' => 'both',
+            'multiple_number' => '',
+            'multiple_from' => '',
+            'multiple_to' => '',
+            'show_remaining_days' => 0,
+          ),
+          'module' => 'date',
+        ),
+      ),
+      'required' => 1,
+      'description' => '',
+      'field_name' => 'field_tschet_customer_dob',
+      'entity_type' => 'node',
+      'bundle' => 'tschet_customer',
+      'deleted' => '0',
+    ),
+
+// INSTANCE: field_tschet_customer_phone.
+    'field_tschet_customer_phone' => array(
+      'label' => 'Customer Phone',
+      'widget' => array(
+        'weight' => '5',
+        'type' => 'phone_textfield',
+        'module' => 'phone',
+        'active' => 0,
+        'settings' => array(),
+      ),
+      'settings' => array(
+        'phone_country_code' => 0,
+        'ca_phone_separator' => '-',
+        'ca_phone_parentheses' => 1,
+        'phone_default_country_code' => '1',
+        'phone_int_max_length' => 15,
+        'user_register_form' => FALSE,
+      ),
+      'display' => array(
+        'default' => array(
+          'label' => 'inline',
+          'type' => 'phone',
+          'weight' => '4',
+          'settings' => array(),
+          'module' => 'phone',
+        ),
+        'full' => array(
+          'label' => 'inline',
+          'type' => 'phone',
+          'weight' => '3',
+          'settings' => array(),
+          'module' => 'phone',
+        ),
+        'teaser' => array(
+          'label' => 'inline',
+          'type' => 'phone',
+          'weight' => '3',
+          'settings' => array(),
+          'module' => 'phone',
+        ),
+      ),
+      'required' => 0,
+      'description' => '',
+      'default_value' => NULL,
+      'field_name' => 'field_tschet_customer_phone',
+      'entity_type' => 'node',
+      'bundle' => 'tschet_customer',
+      'deleted' => '0',
+    ),
+
+// INSTANCE: field_tschet_customer_email.
+    'field_tschet_customer_email' => array(
+      'label' => 'Customer Email',
+      'widget' => array(
+        'weight' => '4',
+        'type' => 'email_textfield',
+        'module' => 'email',
+        'active' => 1,
+        'settings' => array(
+          'size' => '60',
+        ),
+      ),
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'display' => array(
+        'default' => array(
+          'label' => 'inline',
+          'type' => 'email_default',
+          'weight' => '3',
+          'settings' => array(),
+          'module' => 'email',
+        ),
+        'full' => array(
+          'label' => 'inline',
+          'type' => 'email_default',
+          'weight' => '2',
+          'settings' => array(),
+          'module' => 'email',
+        ),
+        'teaser' => array(
+          'label' => 'inline',
+          'type' => 'email_default',
+          'weight' => '2',
+          'settings' => array(),
+          'module' => 'email',
+        ),
+      ),
+      'required' => 0,
+      'description' => '',
+      'default_value' => NULL,
+      'field_name' => 'field_tschet_customer_email',
+      'entity_type' => 'node',
+      'bundle' => 'tschet_customer',
+      'deleted' => '0',
+    ),
 
     // End of field instances array.
   );
