@@ -5,6 +5,7 @@ CONTENTS OF THIS FILE
  * Introduction
  * Installation
  * Field Descriptions
+ * Suggestions
  * Current Maintainers
 
 Introduction
@@ -36,20 +37,20 @@ Description
 ---
 The Tschet Customer moodule uses five custom fields.
 
-Customer Name
+Customer Name  
 A Name field, allowing for entry of separate values for title,
 Given name, Middle name, Family name, Generational value, and Credentials. This 
 allows for a wide range of display options and sorting. This field is being 
 used to generate the Node Title value using hook_node_presave. The default node 
 title field is disabled by use of a hook_form_BASE_FORM_ID_alter.
 
-Date of Birth
+Date of Birth  
 A Date field, collecting a single date value of Year, Month, Day. This is 
 displayed in a custom date format installed with hook_date_format_types. The 
 format is also added with variable_set so that the Date format is immediately 
 available.
 
-Address
+Address  
 A Location CCK field collectign a single address. The field collects locaiton 
 name, address, additional address line, city, state, ZIP, and country. 
 Longitude and Latitude are disabled since mapping was not planned for at this 
@@ -59,14 +60,31 @@ outside the scope of the address field. I also add a custom location.tpl.php
 using hook_theme_registry_alter for the address display, as the default 
 template displays addresses in a non-conventional format.
 
-Customer Email
+Customer Email  
 An Email field with full validation and display options. Collects a single email 
 value.
 
-Customer Phone
+Customer Phone  
 An Phone field with full validation and display options. Collects a single phone  
 number. Currently validates numbers based on USA and Canada number formats, but 
 other formats are available.
+
+Testing
+---
+This code was testing with IDE (PHPStorm) specific code validation tools as 
+well as with Code Sniffer validating against the 
+[Drupal coding standard](https://www.drupal.org/coding-standards). Dsiplay was 
+tested with a variety of browsers using manually entered content as well as
+bulk generated content. Installation was tested multiple times on several Drupal 
+installations.
+
+Suggestions for Future Development
+---
+ * The [Views module](https://www.drupal.org/project/views) would add 
+ signficantly more control over the Customer page displays.
+ * Usage of the Location module could easily be expanded to include mapping 
+ capability.
+ * A Taxonomy could be added for additional Customer sorting functionality.  
 
 Current Maintainers
 ---
