@@ -1,0 +1,209 @@
+<?php
+
+/**
+ * @file
+ * Tschet Customer content type and fields.
+ *
+ * Install File.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function tschet_customer_install() {
+  // Create node type if it doesn't exist.
+  $typecheck = node_type_load('tschet_customer');
+  if (!isset($typecheck->name)) {
+
+    $t = get_t();
+
+    // Define the node type.
+    $type = array(
+      'type' => 'tschet_customer',
+      'name' => $t('Customers'),
+      'base' => 'node_content',
+      'title_label' => $t('Title'),
+      'description' => $t('Business Customers'),
+      'custom' => TRUE,
+    );
+
+    // Set other node defaults not declared above.
+    $content_type = node_type_set_defaults($type);
+
+    // Add the body field.
+    node_add_body_field($content_type, $t('Body'));
+
+    // Save the content type.
+    node_type_save($content_type);
+  }
+
+  // Modify Body Instance.
+  $body_instance = field_info_instance('node', 'body', 'tschet_customer');
+  $body_instance['type'] = 'default_text';
+  $body_instance['label'] = 'Brief Biography';
+  $body_instance['display']['default'] = array(
+    'label' => 'hidden',
+    'type' => 'default_text',
+    'weight' => '5',
+  );
+  $body_instance['display']['full'] = array(
+    'label' => 'hidden',
+    'type' => 'default_text',
+    'weight' => '5',
+  );
+  $body_instance['display']['teaser'] = array(
+    'label' => 'hidden',
+    'type' => 'text_summary_or_trimmed',
+    'weight' => '5',
+  );
+
+  field_update_instance($body_instance);
+
+  // Add persistent variables that control settings.
+  variable_set('date_format_tschet_date_format_month_day_year', 'F j, Y');
+  variable_set('additional_settings__active_tab_tschet_customer', 'edit-submission');
+  variable_set('node_preview_tschet_customer', 1);
+  variable_set('node_options_tschet_customer', array(
+      0 => 'status',
+      1 => 'revision',
+    )
+  );
+  variable_set('node_submitted_tschet_customer', 0);
+  variable_set('menu_options_tschet_customer', array(''));
+  variable_set('menu_parent_tschet_customer', 'main-menu:0');
+  variable_set('pathauto_node_tschet_customer_pattern', 'customers/[node:title]');
+  variable_set('comment_tschet_customer', 0);
+  variable_set('field_bundle_settings_node__tschet_customer', array(
+      'view_modes' =>
+        array(
+          'full' =>
+            array(
+              'custom_settings' => TRUE,
+            ),
+          'teaser' =>
+            array(
+              'custom_settings' => TRUE,
+            ),
+          'rss' =>
+            array(
+              'custom_settings' => FALSE,
+            ),
+          'search_index' =>
+            array(
+              'custom_settings' => FALSE,
+            ),
+          'search_result' =>
+            array(
+              'custom_settings' => FALSE,
+            ),
+          'diff_standard' =>
+            array(
+              'custom_settings' => FALSE,
+            ),
+          'token' =>
+            array(
+              'custom_settings' => FALSE,
+            ),
+          'revision' =>
+            array(
+              'custom_settings' => FALSE,
+            ),
+        ),
+      'extra_fields' =>
+        array(
+          'form' =>
+            array(),
+          'display' =>
+            array(),
+        ),
+    )
+  );
+
+  // Create all the fields we are adding to our content type.
+  foreach (_tschet_customer_install_fields() as $field) {
+    field_create_field($field);
+  }
+
+  // Create all the instances for our fields.
+  foreach (_tschet_customer_installed_instances() as $instance) {
+    field_create_instance($instance);
+  }
+}
+
+/**
+ * Returns a structured array defining the fields created by this content type.
+ *
+ * @return
+ *  An associative array specifying the fields we wish to add to our
+ *  new node type.
+ */
+
+function _tschet_customer_install_fields() {
+  $t = get_t();
+  return array(
+
+  // End of field definitions array.
+  );
+}
+
+
+/**
+ * Returns a structured array defining the instances for this content type.
+ *
+ * @return array
+ *   An associative array specifying the instances we wish to add to our new
+ *   node type.
+ */
+function _tschet_customer_installed_instances() {
+
+  $t = get_t();
+
+  return array(
+
+    // End of field instances array.
+  );
+}
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function tschet_customer_uninstall() {
+
+  // Gather all tschet_customer nodes created.
+  $sql = 'SELECT nid FROM {node} n WHERE n.type = :type';
+  $result = db_query($sql, array(':type' => 'tschet_customer'));
+  $nids = array();
+  foreach ($result as $row) {
+    $nids[] = $row->nid;
+  }
+
+  // Delete all the tschet_customer nodes at once.
+  node_delete_multiple($nids);
+
+  // Remove persistent variables that control settings.
+  variable_del('date_format_tschet_date_format_month_day_year');
+  variable_del('additional_settings__active_tab_tschet_customer');
+  variable_del('node_preview_tschet_customer');
+  variable_del('node_options_riven_tschet_customer');
+  variable_del('node_submitted_tschet_customer');
+  variable_del('menu_options_tschet_customer');
+  variable_del('menu_parent_tschet_customer');
+  variable_del('pathauto_node_tschet_customer_pattern');
+  variable_del('comment_tschet_customer');
+  variable_del('field_bundle_settings_node__tschet_customer');
+
+  // Find all fields and delete instance.
+  $instances = field_info_instances('node', 'tschet_customer');
+  foreach ($instances as $instance_name => $instance) {
+    if ($instance_name != 'body') {
+      field_delete_instance($instance);
+    }
+  }
+// delete our content type
+  node_type_delete('tschet_customer');
+
+  // Purge all field information.
+  field_purge_batch(1000);
+
+}

@@ -1,0 +1,12 @@
+name = Tschet Customer
+description = Customer content type and configuration
+
+package = tschet
+core = 7.x
+
+dependencies[] = date
+dependencies[] = location
+dependencies[] = name
+
+;stylesheets[all][] = css/tschet_customer.css
+;scripts[] = js/tschet_customer.js

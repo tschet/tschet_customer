@@ -1,0 +1,66 @@
+<?php
+/**
+ * @file Tschet customer module.
+ */
+
+/**
+ * Implements hook_date_format_types().
+ */
+function tschet_customer_date_format_types() {
+  return array(
+    'tschet_date_format_month_day_year' => t('Month Day Year'),
+  );
+}
+
+/**
+ * Implements hook_form_tschet_customer_node_form_alter().
+ */
+function tschet_customer_form_tschet_customer_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['title']['#type'] = 'hidden';
+  $form['title']['#required'] = FALSE;
+ }
+
+/**
+ * Implements hook_node_presave().
+ */
+function tschet_customer_node_presave($node) {
+  if ($node->field_tschet_customer_name['und'][0]['title'] != '') {
+  $title = $node->field_tschet_customer_name['und'][0]['title'] . ' ';}
+  else {
+    $title = NULL;
+  }
+  
+  $given = $node->field_tschet_customer_name['und'][0]['given'];
+
+  if ($node->field_tschet_customer_name['und'][0]['middle'] != '') {
+    $middle = ' ' . $node->field_tschet_customer_name['und'][0]['middle'];}
+  else {
+    $middle = NULL;
+  }
+
+  $family = $node->field_tschet_customer_name['und'][0]['family'];
+
+  if ($node->field_tschet_customer_name['und'][0]['generational'] != '') {
+    $generational = ' ' . $node->field_tschet_customer_name['und'][0]['generational'];}
+  else {
+    $generational = NULL;
+  }
+
+  if ($node->field_tschet_customer_name['und'][0]['credentials'] != '') {
+    $credentials = ', ' . $node->field_tschet_customer_name['und'][0]['credentials'];}
+  else {
+    $credentials = NULL;
+  }
+
+  $node_title = $title . $given . ' ' . $middle . ' ' . $family . $generational . $credentials;
+  $node->title = $node_title;
+}
+
+/**
+ * Implements hook_field_access().
+ */
+function tschet_customer_field_access($op, $field, $entity_type, $entity, $account) {
+  if ($entity->type == 'tschet_customer' && $op == 'edit') {
+    //dpm($entity_type);
+  }
+}
