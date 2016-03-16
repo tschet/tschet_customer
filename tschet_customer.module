@@ -1,6 +1,7 @@
 <?php
 /**
- * @file Tschet customer module.
+ * @file
+ * Module file for Tschet Customer module.
  */
 
 /**
@@ -18,14 +19,15 @@ function tschet_customer_date_format_types() {
 function tschet_customer_form_tschet_customer_node_form_alter(&$form, &$form_state, $form_id) {
   $form['title']['#type'] = 'hidden';
   $form['title']['#required'] = FALSE;
- }
+}
 
 /**
  * Implements hook_node_presave().
  */
 function tschet_customer_node_presave($node) {
   if ($node->field_tschet_customer_name['und'][0]['title'] != '') {
-  $title = $node->field_tschet_customer_name['und'][0]['title'] . ' ';}
+    $title = $node->field_tschet_customer_name['und'][0]['title'] . ' ';
+  }
   else {
     $title = NULL;
   }
@@ -33,7 +35,8 @@ function tschet_customer_node_presave($node) {
   $given = $node->field_tschet_customer_name['und'][0]['given'];
 
   if ($node->field_tschet_customer_name['und'][0]['middle'] != '') {
-    $middle = ' ' . $node->field_tschet_customer_name['und'][0]['middle'];}
+    $middle = ' ' . $node->field_tschet_customer_name['und'][0]['middle'];
+  }
   else {
     $middle = NULL;
   }
@@ -41,13 +44,15 @@ function tschet_customer_node_presave($node) {
   $family = $node->field_tschet_customer_name['und'][0]['family'];
 
   if ($node->field_tschet_customer_name['und'][0]['generational'] != '') {
-    $generational = ' ' . $node->field_tschet_customer_name['und'][0]['generational'];}
+    $generational = ' ' . $node->field_tschet_customer_name['und'][0]['generational'];
+  }
   else {
     $generational = NULL;
   }
 
   if ($node->field_tschet_customer_name['und'][0]['credentials'] != '') {
-    $credentials = ', ' . $node->field_tschet_customer_name['und'][0]['credentials'];}
+    $credentials = ', ' . $node->field_tschet_customer_name['und'][0]['credentials'];
+  }
   else {
     $credentials = NULL;
   }
@@ -57,7 +62,7 @@ function tschet_customer_node_presave($node) {
 }
 
 /**
-* Implements hook_theme_registry_alter().
+ * Implements hook_theme_registry_alter().
  */
 function tschet_customer_theme_registry_alter(&$theme_registry) {
   // Get the path to this module.
@@ -77,4 +82,21 @@ function tschet_customer_theme_registry_alter(&$theme_registry) {
       $theme_registry[$key]['type'] = 'module';
     }
   }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function tschet_customer_menu() {
+  $items['customers'] = array(
+    'title' => 'Customers',
+    'description' => 'List of Customers',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('tschet_customer_callback'),
+    'access arguments' => array('access content'),
+    'type' => MENU_NORMAL_ITEM,
+    'menu_name' => 'main-menu',
+    'file' => 'includes/tschet_customer_callback.inc',
+  );
+  return $items;
 }

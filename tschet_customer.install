@@ -1,10 +1,7 @@
 <?php
-
 /**
  * @file
- * Tschet Customer content type and fields.
- *
- * Install File.
+ * Install file for Tschet Customer module.
  */
 
 /**
@@ -77,44 +74,44 @@ function tschet_customer_install() {
       'view_modes' =>
         array(
           'full' =>
-            array(
-              'custom_settings' => TRUE,
-            ),
+          array(
+            'custom_settings' => TRUE,
+          ),
           'teaser' =>
-            array(
-              'custom_settings' => TRUE,
-            ),
+          array(
+            'custom_settings' => TRUE,
+          ),
           'rss' =>
-            array(
-              'custom_settings' => FALSE,
-            ),
+          array(
+            'custom_settings' => FALSE,
+          ),
           'search_index' =>
-            array(
-              'custom_settings' => FALSE,
-            ),
+          array(
+            'custom_settings' => FALSE,
+          ),
           'search_result' =>
-            array(
-              'custom_settings' => FALSE,
-            ),
+          array(
+            'custom_settings' => FALSE,
+          ),
           'diff_standard' =>
-            array(
-              'custom_settings' => FALSE,
-            ),
+          array(
+            'custom_settings' => FALSE,
+          ),
           'token' =>
-            array(
-              'custom_settings' => FALSE,
-            ),
+          array(
+            'custom_settings' => FALSE,
+          ),
           'revision' =>
-            array(
-              'custom_settings' => FALSE,
-            ),
+          array(
+            'custom_settings' => FALSE,
+          ),
         ),
       'extra_fields' =>
         array(
           'form' =>
-            array(),
+          array(),
           'display' =>
-            array(),
+          array(),
         ),
     )
   );
@@ -133,15 +130,13 @@ function tschet_customer_install() {
 /**
  * Returns a structured array defining the fields created by this content type.
  *
- * @return
- *  An associative array specifying the fields we wish to add to our
- *  new node type.
+ * @return array
+ *   An associative array specifying the fields to add to the node type.
  */
-
 function _tschet_customer_install_fields() {
   $t = get_t();
   return array(
-// FIELD: field_tschet_customer_name.
+  // FIELD: field_tschet_customer_name.
     'field_tschet_customer_name' => array(
       'translatable' => '0',
       'entity_types' => array(),
@@ -291,7 +286,7 @@ function _tschet_customer_install_fields() {
       ),
     ),
 
-// FIELD: field_tschet_customer_address.
+  // FIELD: field_tschet_customer_address.
     'field_tschet_customer_address' => array(
       'translatable' => '0',
       'entity_types' => array(),
@@ -420,7 +415,7 @@ function _tschet_customer_install_fields() {
       ),
     ),
 
-// FIELD: field_tschet_customer_dob.
+  // FIELD: field_tschet_customer_dob.
     'field_tschet_customer_dob' => array(
       'translatable' => '0',
       'entity_types' => array(),
@@ -487,7 +482,7 @@ function _tschet_customer_install_fields() {
       ),
     ),
 
-// FIELD: field_tschet_customer_phone.
+  // FIELD: field_tschet_customer_phone.
     'field_tschet_customer_phone' => array(
       'translatable' => '0',
       'entity_types' => array(),
@@ -537,7 +532,7 @@ function _tschet_customer_install_fields() {
       ),
     ),
 
-// FIELD: field_tschet_customer_email.
+  // FIELD: field_tschet_customer_email.
     'field_tschet_customer_email' => array(
       'translatable' => '0',
       'entity_types' => array(),
@@ -584,13 +579,9 @@ function _tschet_customer_install_fields() {
         ),
       ),
     ),
-
-
     // End of field definitions array.
   );
 }
-
-
 /**
  * Returns a structured array defining the instances for this content type.
  *
@@ -599,11 +590,9 @@ function _tschet_customer_install_fields() {
  *   node type.
  */
 function _tschet_customer_installed_instances() {
-
   $t = get_t();
-
   return array(
-// INSTANCE: field_tschet_customer_name.
+  // INSTANCE: field_tschet_customer_name.
     'field_tschet_customer_name' => array(
       'label' => 'Customer Name',
       'widget' => array(
@@ -719,7 +708,7 @@ function _tschet_customer_installed_instances() {
       'deleted' => '0',
     ),
 
-// INSTANCE: field_tschet_customer_address.
+  // INSTANCE: field_tschet_customer_address.
     'field_tschet_customer_address' => array(
       'label' => 'Customer Address',
       'widget' => array(
@@ -764,7 +753,7 @@ function _tschet_customer_installed_instances() {
       'deleted' => '0',
     ),
 
-// INSTANCE: field_tschet_customer_dob.
+  // INSTANCE: field_tschet_customer_dob.
     'field_tschet_customer_dob' => array(
       'label' => 'Customer Date of Birth',
       'widget' => array(
@@ -841,7 +830,7 @@ function _tschet_customer_installed_instances() {
       'deleted' => '0',
     ),
 
-// INSTANCE: field_tschet_customer_phone.
+  // INSTANCE: field_tschet_customer_phone.
     'field_tschet_customer_phone' => array(
       'label' => 'Customer Phone',
       'widget' => array(
@@ -891,7 +880,7 @@ function _tschet_customer_installed_instances() {
       'deleted' => '0',
     ),
 
-// INSTANCE: field_tschet_customer_email.
+  // INSTANCE: field_tschet_customer_email.
     'field_tschet_customer_email' => array(
       'label' => 'Customer Email',
       'widget' => array(
@@ -942,7 +931,6 @@ function _tschet_customer_installed_instances() {
   );
 }
 
-
 /**
  * Implements hook_uninstall().
  */
@@ -978,7 +966,7 @@ function tschet_customer_uninstall() {
       field_delete_instance($instance);
     }
   }
-// delete our content type
+  // Delete our content type.
   node_type_delete('tschet_customer');
 
   // Purge all field information.
