@@ -5,8 +5,10 @@ package = tschet
 core = 7.x
 
 dependencies[] = date
+dependencies[] = email
 dependencies[] = location
+dependencies[] = location_cck
 dependencies[] = name
+dependencies[] = phone
 
-;stylesheets[all][] = css/tschet_customer.css
-;scripts[] = js/tschet_customer.js
+stylesheets[all][] = css/tschet_customer.css
