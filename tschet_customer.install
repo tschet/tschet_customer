@@ -596,7 +596,7 @@ function _tschet_customer_installed_instances() {
     'field_tschet_customer_name' => array(
       'label' => 'Customer Name',
       'widget' => array(
-        'weight' => '1',
+        'weight' => '-5',
         'type' => 'name_widget',
         'module' => 'name',
         'active' => 0,
@@ -712,7 +712,7 @@ function _tschet_customer_installed_instances() {
     'field_tschet_customer_address' => array(
       'label' => 'Customer Address',
       'widget' => array(
-        'weight' => '3',
+        'weight' => '-3',
         'type' => 'location',
         'module' => 'location_cck',
         'active' => 0,
@@ -757,7 +757,7 @@ function _tschet_customer_installed_instances() {
     'field_tschet_customer_dob' => array(
       'label' => 'Customer Date of Birth',
       'widget' => array(
-        'weight' => '2',
+        'weight' => '-4',
         'type' => 'date_text',
         'module' => 'date',
         'active' => 1,
@@ -834,7 +834,7 @@ function _tschet_customer_installed_instances() {
     'field_tschet_customer_phone' => array(
       'label' => 'Customer Phone',
       'widget' => array(
-        'weight' => '5',
+        'weight' => '-1',
         'type' => 'phone_textfield',
         'module' => 'phone',
         'active' => 0,
@@ -884,7 +884,7 @@ function _tschet_customer_installed_instances() {
     'field_tschet_customer_email' => array(
       'label' => 'Customer Email',
       'widget' => array(
-        'weight' => '4',
+        'weight' => '-2',
         'type' => 'email_textfield',
         'module' => 'email',
         'active' => 1,
